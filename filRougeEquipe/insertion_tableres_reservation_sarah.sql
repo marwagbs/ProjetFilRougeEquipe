@@ -1,3 +1,4 @@
+
 -- Insertion des catégories
 INSERT INTO Categories (libelle) VALUES
 ('Entrée'),
@@ -55,18 +56,41 @@ INSERT INTO Restaurants (nom, adresse, cpo, ville, id_carte) VALUES
 ('Chez Marcel', '8 Rue de Délices', '69002', 'LYON', 3),
 ('Le Bon Appétit', '15 Quai Savoureux', '33000', 'BORDEAUX', 4);
 
+-- Insertion des tables de réservation
+INSERT INTO tableres (nombre_places, numero_table, statut, id_restaurant) VALUES
+(4, 1, 'libre', 1),
+(2, 2, 'occupée', 1),
+(6, 3, 'libre', 2),
+(5, 4, 'libre', 3),
+(3, 5, 'occupée', 2),
+(4, 6, 'libre', 4),
+(2, 7, 'libre', 3),
+(6, 8, 'libre', 4),
+(3, 9, 'occupée', 1),
+(5, 10, 'libre', 1),
+(4, 11, 'libre', 4),
+(2, 12, 'occupée', 2),
+(6, 13, 'libre', 3),
+(5, 14, 'libre', 4),
+(3, 15, 'occupée', 1),
+(4, 16, 'libre', 2),
+(2, 17, 'libre', 3),
+(6, 18, 'libre', 4),
+(3, 19, 'occupée', 1),
+(5, 20, 'libre', 2);
+
 -- Insertion des réservations
-INSERT INTO Reservations (date_res, heure, nb_personne, id_utilisateur, id_restaurant,id_table, statut, commentaire) VALUES
-('2024-02-01', '19:30:00', 4, 1, 4, 13, 'acceptée', 'Réservation pour un anniversaire'),
-('2024-02-02', '20:00:00', 2, 2, 4, 14, 'refusée', NULL),
-('2024-02-03', '18:45:00', 3, 3, 4, 15, 'refusée', 'Réservation pour un groupe trop important'),
-('2024-02-04', '19:00:00', 5, 4, 4, 16, 'acceptée', NULL),
-('2024-02-05', '21:00:00', 2, 5, 4, 17, 'acceptée', NULL),
-('2024-02-06', '19:15:00', 3, 6, 1, 1, 'refusée', NULL),
-('2024-02-07', '20:30:00', 4, 7, 1, 2,  'acceptée', NULL),
-('2024-02-08', '18:00:00', 2, 8, 1, 3, 'refusée', NULL),
-('2024-02-09', '19:45:00', 5, 9, 1, 4,  'acceptée', NULL),
-('2024-02-10', '20:15:00', 3, 10, 1, 1, 'acceptée', NULL);
+INSERT INTO Reservations (date_res, heure, nb_personne, id_utilisateur, id_restaurant, statut, commentaire, id_table) VALUES
+('2024-02-22', '19:30:00', 4, 1, 1, 'acceptée', 'Réservation pour un anniversaire', 2),
+('2024-02-22', '20:00:00', 2, 2, 2, 'refusée', NULL, 3),
+('2024-02-03', '18:45:00', 3, 3, 3, 'refusée', 'Réservation pour un groupe trop important', 4),
+('2024-02-04', '19:00:00', 5, 4, 4, 'acceptée', NULL, 6),
+('2024-02-25', '21:00:00', 2, 5, 1, 'acceptée', NULL, 10),
+('2024-02-06', '19:15:00', 3, 6, 2, 'refusée', NULL, 5),
+('2024-02-07', '20:30:00', 4, 7, 3, 'acceptée', NULL, 7),
+('2024-02-08', '18:00:00', 2, 8, 4, 'refusée', NULL, 11),
+('2024-02-22', '19:45:00', 5, 9, 1, 'acceptée', NULL, 9),
+('2024-02-10', '20:15:00', 3, 10, 2, 'acceptée', NULL, 12);
 
 
 -- Insertion des messages
@@ -76,29 +100,6 @@ INSERT INTO Messages (id_utilisateur, id_restaurant, contenu, sujet) VALUES
 (6, 3, 'Y a-t-il des plats végétariens disponibles ?', 'Options végétariennes'),
 (8, 4, 'Pouvez-vous personnaliser un plat pour moi ?', 'Personnalisation du plat'),
 (10, 1, 'Nous avons un grand groupe, avez-vous une salle privée ?', 'Groupe important');
-
--- Insertion des tables de restaurants
-INSERT INTO tableres (nombre_places, numero_table, statut, id_restaurant) VALUES
-(4, 1, 'absent', 1),
-(2, 2, 'present', 1),
-(6, 3, 'absent', 1),
-(5, 4, 'absent', 1),
-(3, 5, 'present', 2),
-(4, 6, 'absent', 2),
-(2, 7, 'absent', 2),
-(6, 8, 'absent', 2),
-(3, 9, 'present', 3),
-(5, 10, 'absent', 3),
-(4, 11, 'absent', 3),
-(2, 12, 'present', 3),
-(6, 13, 'absent', 4),
-(5, 14, 'absent', 4),
-(3, 15, 'present', 4),
-(4, 16, 'absent', 4),
-(2, 17, 'absent', 4),
-(6, 18, 'absent', 4),
-(3, 19, 'present', 4),
-(5, 20, 'absent', 4);
 
 -- Insertion des commandes
 INSERT INTO Commandes (statut, id_table) VALUES
@@ -174,10 +175,3 @@ VALUES (1,1),
 	   (4,10),
 	   (4,11),
 	   (4,8);
-	   
-	  
-
-
-
-
-
