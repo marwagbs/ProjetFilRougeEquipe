@@ -1,5 +1,7 @@
 package m2i.srpingboot.fil.rouge.equipe.filRougeEquipe.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +17,9 @@ public class TableResService {
 	public TableRes getById(int id) {return tableResRepo.findById(id).get();}
 	public void save(TableRes tableRes) {tableResRepo.save(tableRes);}
 	public void deleteById(int id) {tableResRepo.deleteById(id);}
+	
+	public List<TableRes> findByRestaurantId(int id) {
+		return tableResRepo.findByRestaurantId(id);
+	}
+	
 }

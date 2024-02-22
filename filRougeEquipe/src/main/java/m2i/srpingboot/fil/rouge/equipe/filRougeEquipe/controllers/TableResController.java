@@ -47,13 +47,13 @@ public class TableResController {
 		
 	}
 	// methode à completer : pas fini 
-	@PutMapping(path = "/{id}")
-	public ResponseEntity<Void> statutTablePresent(@PathVariable("id") int id, @RequestBody TableRes t){
-		t.setId(id);
-		
-		return new ResponseEntity<>(HttpStatus.OK);
-		
-	}
+//	@PutMapping(path = "/{id}")
+//	public ResponseEntity<Void> statutTablePresent(@PathVariable("id") int id, @RequestBody TableRes t){
+//		t.setId(id);
+//		
+//		return new ResponseEntity<>(HttpStatus.OK);
+//		
+//	}
 	
 
 	@DeleteMapping(path= "/{id}")
