@@ -22,7 +22,9 @@ public class Reservation {
 	private int id;
 	private  LocalDate dateRes; 
 	private LocalTime heure;
+
 	private int nbPersonnes;
+
 	private String statut;
 	private String commentaire;	
 	
