@@ -20,7 +20,7 @@ INSERT INTO Produits (nom, description, prix, id_categorie) VALUES
 
 
 -- Insertion des utilisateurs
-INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, telephone, isAdmin) VALUES
+INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, telephone, is_admin) VALUES
 ('Dupont', 'Jean', 'jean.dupont@mail.com', 'motdepasse1', '1234567890', 0),
 ('Martin', 'Sophie', 'sophie.martin@mail.com', 'motdepasse2', '2345678901', 0),
 ('Lefevre', 'Pierre', 'pierre.lefevre@mail.com', 'motdepasse3', '3456789012', 1),
@@ -101,7 +101,7 @@ INSERT INTO TablesRes (nombre_places, numero_table, statut, id_reservation, id_r
 (5, 10, 'absent', 10, 2);
 
 -- Insertion des commandes
-INSERT INTO Commandes (libelle, id_table) VALUES
+INSERT INTO Commandes (statut, id_table) VALUES
 ('Prête', 1),
 ('Servie', 2),
 ('Réglée', 3),
