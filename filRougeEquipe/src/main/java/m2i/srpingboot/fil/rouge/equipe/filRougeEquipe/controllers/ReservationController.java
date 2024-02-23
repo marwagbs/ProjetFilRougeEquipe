@@ -80,6 +80,8 @@ public class ReservationController {
 	@PutMapping("/acceptees/{id}")
 	public ResponseEntity<Void> updateStatutReservation(@PathVariable("id") int id, @RequestBody Reservation reservation) {
 		reservation.setId(id);
+		int idTableRes = reservation.getTableRes().getId();
+		ts.modifStatutTable(idTableRes, reservation.getStatut());
 		rs.save(reservation);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
