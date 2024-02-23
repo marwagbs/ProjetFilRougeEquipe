@@ -20,7 +20,10 @@ public class TableResService {
 	public void save(TableRes tableRes) {tableResRepo.save(tableRes);}
 	public void deleteById(int id) {tableResRepo.deleteById(id);}
 	
-	
+	/*****************************************************************************************/
+	public List<TableRes> findByRestaurantId(int id) {
+		return tableResRepo.findByRestaurantId(id);
+	}
 	
 /**************************************************************************************************/
 	

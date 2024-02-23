@@ -2,12 +2,16 @@ package m2i.srpingboot.fil.rouge.equipe.filRougeEquipe.repositories;
 
 import java.util.List;
 
+
 import org.springframework.data.jpa.repository.Query;
+
+
 import org.springframework.data.repository.CrudRepository;
 
 import m2i.srpingboot.fil.rouge.equipe.filRougeEquipe.entities.TableRes;
 
 public interface TableResRepository extends CrudRepository<TableRes, Integer>{
+
 	
 	
 /*****Requete pour afficher toutes les tables avec statut libre ou occupée et mentions de reservation pour aujourd'hui*****/
@@ -40,5 +44,8 @@ public interface TableResRepository extends CrudRepository<TableRes, Integer>{
 		
 	
 
+
+// Madina ?? 
+	List<TableRes> findByRestaurantId(int id);
 
 }
