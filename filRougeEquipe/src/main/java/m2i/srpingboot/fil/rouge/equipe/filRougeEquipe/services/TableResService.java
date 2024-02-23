@@ -12,7 +12,7 @@ import m2i.srpingboot.fil.rouge.equipe.filRougeEquipe.repositories.TableResRepos
 @Service
 @Transactional
 public class TableResService {
-	@Autowired private TableResRepository tableResRepo; 
+	@Autowired private TableResRepository tableResRepo;
 	
 	
 	public Iterable<TableRes> getAll() {return tableResRepo.findAll();}
@@ -23,6 +23,18 @@ public class TableResService {
 	/*****************************************************************************************/
 	public List<TableRes> findByRestaurantId(int id) {
 		return tableResRepo.findByRestaurantId(id);
+	}
+	
+	public void modifStatutTable(int id, String statutReservation) {
+		TableRes tableRes = tableResRepo.findById(id).get();
+		if ("présent".equals(statutReservation)) {
+			tableRes.setStatut("occupée");
+		      tableResRepo.save(tableRes);
+		}
+		if ("absent".equals(statutReservation)) {
+			tableRes.setStatut("libre");
+	        tableResRepo.save(tableRes);
+		}
 	}
 	
 /**************************************************************************************************/
