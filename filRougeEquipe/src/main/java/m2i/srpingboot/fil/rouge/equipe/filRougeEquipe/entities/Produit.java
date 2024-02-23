@@ -28,7 +28,7 @@ public class Produit {
 	@ManyToOne
 	@JoinColumn(name="id_categorie")
 	private Categorie categorie;
-	@ManyToMany(fetch =FetchType.EAGER)
+	@ManyToMany(fetch =FetchType.LAZY)
 	@JoinTable(
 			name="Produits_Cartes",
 			joinColumns= {@JoinColumn(name="id_produit")},

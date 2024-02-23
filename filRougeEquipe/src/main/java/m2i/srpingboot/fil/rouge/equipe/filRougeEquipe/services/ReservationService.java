@@ -29,7 +29,7 @@ public class ReservationService {
 		Reservation reservation = reservationRepo.findById(reservationId).get();
 		List<TableRes> allTableRes = tabResRepo.findByRestaurantId(reservation.getRestaurant().getId());
 		List<TableRes> filteredTableRes = allTableRes.stream()
-				.filter(tabResRepo -> tabResRepo.getNombrePlaces() >= reservation.getNbPersonnes())
+				.filter(tabResRepo -> tabResRepo.getNombrePlaces() >= reservation.getNbPersonne())
 				.collect(Collectors.toList());
 		return filteredTableRes;
 	}

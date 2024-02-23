@@ -1,5 +1,7 @@
 package m2i.srpingboot.fil.rouge.equipe.filRougeEquipe.entities;
 
+import java.time.LocalDateTime;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import jakarta.persistence.Entity;
@@ -20,6 +22,8 @@ public class Utilisateur {
 	private String email;
 	private String motDePasse;
 	private String telephone;
-	private Boolean isAdmin;
+	private String token;
+	private LocalDateTime tempsExpiration;
+	private String role;
 	
 }

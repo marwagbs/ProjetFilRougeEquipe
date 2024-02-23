@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,8 @@ public class Restaurant {
 	private String adresse;
 	private String cpo;
 	private String ville;
-	@ManyToOne ()
+	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="id_carte")
 	private Carte carte;
 	@ManyToMany(fetch =FetchType.EAGER)
