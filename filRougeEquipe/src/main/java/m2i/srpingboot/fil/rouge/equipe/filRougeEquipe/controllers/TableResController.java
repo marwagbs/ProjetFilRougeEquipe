@@ -46,22 +46,31 @@ public class TableResController {
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}
-	// methode à completer : pas fini 
-//	@PutMapping(path = "/{id}")
-//	public ResponseEntity<Void> statutTablePresent(@PathVariable("id") int id, @RequestBody TableRes t){
-//		t.setId(id);
-//		
-//		return new ResponseEntity<>(HttpStatus.OK);
-//		
-//	}
-	
+
 
 	@DeleteMapping(path= "/{id}")
 		public ResponseEntity<Void> delete(@PathVariable("id") int id ){
 		tableservice.deleteById(id);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-			
+			return new ResponseEntity<Void>(HttpStatus.OK);	
 		}
+	/******************** Methodes pour changer statut table a present ou absent ****************************/
 	
+	@PutMapping(path = "/{id}/libre")
+    public ResponseEntity<Void> statutTableLibre(@PathVariable("id") int id) {
+	tableservice.mettreStatutLibre(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+    }
+	
+	@PutMapping(path = "/{id}/occupee")
+    public ResponseEntity<Void> statutTableOccupee(@PathVariable("id") int id) {
+	tableservice.mettreStatutOccupee(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+    }
+	
+	@GetMapping(path = "/{idRes}/tables")
+	public ResponseEntity<Iterable<TableRes>> afficherTablesRestau(@PathVariable("idRes") int idRes){
+		return new ResponseEntity<>(tableservice.afficherTablesRestau(idRes), HttpStatus.OK); 
+		
+	}
 	
 }
