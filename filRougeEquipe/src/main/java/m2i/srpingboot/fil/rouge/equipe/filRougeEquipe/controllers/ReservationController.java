@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import m2i.srpingboot.fil.rouge.equipe.filRougeEquipe.entities.Reservation;
@@ -30,24 +29,34 @@ public class ReservationController {
 	@Autowired
 	private TableResService ts;
 	
-//	@GetMapping
-//	public Iterable<Reservation> getAll() {
-//		return rs.getAll();
-//	}
-	
 	@GetMapping
-	public Iterable<Reservation> getReservationsByResto() {
-		return rs.findByRestaurantNom("Le Petit Bistro");
+	public Iterable<Reservation> getAll() {
+		return rs.getAll();
 	}
 	
-	@GetMapping("/tableres")
-	public Iterable<TableRes> getTableRes() {
-		return ts.findByRestaurantId(1);
+	@GetMapping("/restaurant/{restaurantId}")
+	public Iterable<Reservation> getReservationsByResto(@PathVariable int restaurantId) {
+		return rs.findByRestaurantId(restaurantId);
 	}
 	
-	@GetMapping("/filtred")
-	public List<TableRes> getFiltredTableRes(@RequestParam int reservationId) {
+	@GetMapping("/tableres/{restaurantId}")
+	public Iterable<TableRes> getTableRes(@PathVariable int restaurantId) {
+		return ts.findByRestaurantId(restaurantId);
+	}
+	
+	@GetMapping("/filtred/{reservationId}")
+	public List<TableRes> getFiltredTableRes(@PathVariable int reservationId) {
 		return rs.getFilteredTableRes(reservationId);
+	}
+	
+	@GetMapping("/acceptees")
+	public List<Reservation> getReservationsByStatut() {
+		return rs.getReservationsByStatut("acceptée", "présent");
+	}
+	
+	@GetMapping("/acceptees/{id}")
+	public List<Reservation> getReservationsByStatutAndId(@PathVariable("id") int id) {
+		return rs.getReservationsByStatutAndId("acceptée", "présent", id);
 	}
 	
 	@GetMapping("/{id}")
@@ -63,6 +72,13 @@ public class ReservationController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@PathVariable("id") int id, @RequestBody Reservation reservation) {
+		reservation.setId(id);
+		rs.save(reservation);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PutMapping("/acceptees/{id}")
+	public ResponseEntity<Void> updateStatutReservation(@PathVariable("id") int id, @RequestBody Reservation reservation) {
 		reservation.setId(id);
 		rs.save(reservation);
 		return new ResponseEntity<>(HttpStatus.OK);
