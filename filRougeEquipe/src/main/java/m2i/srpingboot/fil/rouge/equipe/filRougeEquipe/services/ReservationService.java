@@ -22,8 +22,8 @@ public class ReservationService {
 	public Reservation getById(int id) { return reservationRepo.findById(id).get(); }
 	public void save(Reservation reservation) { reservationRepo.save(reservation); }
 	public void delete(int id) { reservationRepo.deleteById(id); }
-	public List<Reservation> findByRestaurantNom(String nom) {
-		return reservationRepo.findByRestaurantNom(nom);
+	public List<Reservation> findByRestaurantId(int restaurantId) {
+		return reservationRepo.findByRestaurantId(restaurantId);
 	}
 	public List<TableRes> getFilteredTableRes(int reservationId) {
 		Reservation reservation = reservationRepo.findById(reservationId).get();
@@ -34,5 +34,19 @@ public class ReservationService {
 		return filteredTableRes;
 	}
 	
+	public List<Reservation> findByStatutAndId(String statut, int id) {
+		return reservationRepo.findByStatutAndId(statut, id);
+	}
 	
+	public List<Reservation> findAllByStatutIn(List<String> list) {
+		return reservationRepo.findAllByStatutIn(list);
+	}
+	
+	public List<Reservation> getReservationsByStatut(String statut1, String statut2) {
+		return reservationRepo.findAllByStatutIn(List.of(statut1, statut2));
+	}
+	
+	public List<Reservation> getReservationsByStatutAndId(String statut1, String statut2, int id) {
+		return reservationRepo.findAllByStatutInAndId(List.of(statut1, statut2), id);
+	}
 }
