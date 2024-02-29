@@ -6,7 +6,7 @@ import java.util.List;
 public class ServiceException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
-	private List<String> erreurs = new ArrayList<>();
+	private final  List<String> erreurs = new ArrayList<>();
 
 	public ServiceException() {
 	}

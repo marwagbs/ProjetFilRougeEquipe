@@ -22,8 +22,8 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.TableResService;
 public class TableResController {
  private final TableResService tableservice;
 	@Autowired
-	public TableResController() {
-		this.tableservice = new TableResService();
+	public TableResController(TableResService tableservice) {
+		this.tableservice = tableservice;
 		
 	}
 	@GetMapping

@@ -14,8 +14,8 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.repositories.TableResRepos
 public class TableResService {
  private  final TableResRepository tableResRepo;
 	@Autowired
- public TableResService() {
-	this.tableResRepo = null;
+ public TableResService(TableResRepository tableResRepo) {
+	this.tableResRepo = tableResRepo;
 	
 }
 	

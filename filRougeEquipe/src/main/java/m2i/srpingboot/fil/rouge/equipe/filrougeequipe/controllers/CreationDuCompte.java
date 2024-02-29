@@ -18,8 +18,8 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.UtilisateurServic
 public class CreationDuCompte {
  private final UtilisateurService service;
 	@Autowired
-	public CreationDuCompte() {
-		this.service = new UtilisateurService();
+	public CreationDuCompte(UtilisateurService service) {
+		this.service =service;
 		// TODO Auto-generated constructor stub
 	}
 	@PostMapping

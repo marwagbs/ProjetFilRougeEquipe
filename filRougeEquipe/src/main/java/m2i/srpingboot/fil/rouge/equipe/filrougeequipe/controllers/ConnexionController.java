@@ -19,8 +19,8 @@ public class ConnexionController {
 	
 	private final UtilisateurService service;
 	@Autowired
-	public ConnexionController() {
-		this.service = new UtilisateurService();
+	public ConnexionController(UtilisateurService service) {
+		this.service = service;
 		
 	}
 	/*

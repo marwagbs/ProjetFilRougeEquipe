@@ -22,10 +22,10 @@ public class CommandeService {
 	 private final TableResRepository trepo;
 	
 	 @Autowired
-	public CommandeService() {
-		this.repo = null;
-		this.prepo = null;
-		this.trepo = null;
+	public CommandeService(CommandeRepository repo, ProduitRepository prepo, TableResRepository trepo) {
+		this.repo = repo;
+		this.prepo = prepo;
+		this.trepo = trepo;
 		
 	}
 	public Iterable<Commande> selectAll(){

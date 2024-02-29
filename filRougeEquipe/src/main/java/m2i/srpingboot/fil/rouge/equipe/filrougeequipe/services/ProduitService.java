@@ -14,8 +14,8 @@ public class ProduitService {
 	
  private final ProduitRepository pRepo;
 	@Autowired
-   public ProduitService() {
-	this.pRepo = null;
+   public ProduitService( ProduitRepository pRepo) {
+	this.pRepo = pRepo;
 		
 	}
 	public Iterable<Produit> selectAll(){
