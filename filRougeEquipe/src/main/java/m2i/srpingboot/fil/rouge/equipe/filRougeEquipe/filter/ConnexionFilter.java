@@ -54,9 +54,30 @@ public class ConnexionFilter implements Filter{
 		Utilisateur utilisateur = service.getByToken(auth);
 		if (utilisateur == null) {
 			httpResp.sendError(HttpStatus.UNAUTHORIZED.value());
-		} else {
-			chain.doFilter(request, response);
-		}
+			return;
+		} 
 		
+
+        /*
+         * Si le rôle de l'utilisateur n'est ni "admin" ni "equipe", interdire l'accès
+         */
+        if (!"admin".equals(utilisateur.getRole()) && !"equipe".equals(utilisateur.getRole())) {
+            httpResp.sendError(HttpStatus.FORBIDDEN.value());
+            return;
+        }
+
+        /*
+         * Si le rôle de l'utilisateur est "client" ou "equipe", interdire l'accès à la
+         * page de création de compte
+         */
+        if ("client".equals(utilisateur.getRole()) || "equipe".equals(utilisateur.getRole())) {
+            if ("/creation-compte".equals(httpReq.getServletPath())) {
+                httpResp.sendError(HttpStatus.FORBIDDEN.value());
+                return;
+            }
+        }
+
+        // Autoriser l'accès pour les autres cas
+        chain.doFilter(request, response);
 	}
 }
