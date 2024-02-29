@@ -13,8 +13,8 @@ public class RestaurantService {
 	 private final  RestaurantRepository restaurantRepo;
 	
 	 @Autowired
-	 public RestaurantService() {
-		this.restaurantRepo = null;
+	 public RestaurantService(RestaurantRepository restaurantRepo) {
+		this.restaurantRepo = restaurantRepo;
 		
 	}
 	public Iterable<Restaurant> getAll() { return restaurantRepo.findAll();}

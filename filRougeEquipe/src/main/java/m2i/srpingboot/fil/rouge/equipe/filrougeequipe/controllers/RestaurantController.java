@@ -22,8 +22,8 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.RestaurantService
 public class RestaurantController {
 	 private final RestaurantService restaurantservice;
 	 @Autowired
-	public RestaurantController() {
-		this.restaurantservice = new RestaurantService();
+	public RestaurantController( RestaurantService restaurantservice) {
+		this.restaurantservice = restaurantservice;
 		
 	}
 	@GetMapping

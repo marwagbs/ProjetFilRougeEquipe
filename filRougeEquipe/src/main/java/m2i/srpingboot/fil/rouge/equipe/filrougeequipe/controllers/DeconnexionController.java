@@ -14,8 +14,8 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.UtilisateurServic
 public class DeconnexionController {
 private final UtilisateurService service;
 	@Autowired 
-	public DeconnexionController() {
-		this.service = new UtilisateurService();
+	public DeconnexionController(UtilisateurService service) {
+		this.service = service;
 		
 	}
 	/*

@@ -20,8 +20,8 @@ public class UtilisateurService {
 	
 	private final UtilisateurRepository repo;
 	@Autowired
-	public UtilisateurService() {
-		this.repo = null;
+	public UtilisateurService(UtilisateurRepository repo) {
+		this.repo = repo;
 		 
 	}
 	public void insert(Utilisateur utilisateur) {
@@ -29,7 +29,6 @@ public class UtilisateurService {
 		try {
 			verifierLesDonnees(utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(), utilisateur.getMotDePasse(), utilisateur.getTelephone());
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

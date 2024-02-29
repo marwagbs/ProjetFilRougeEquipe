@@ -30,9 +30,9 @@ public class ReservationController {
 	private final TableResService ts;
 	
 	@Autowired
-	public ReservationController() {
-		this.rs = new ReservationService();
-		this.ts = new TableResService();
+	public ReservationController(ReservationService rs, TableResService ts) {
+		this.rs =rs;
+		this.ts =  ts;
 		
 	}
 	@GetMapping

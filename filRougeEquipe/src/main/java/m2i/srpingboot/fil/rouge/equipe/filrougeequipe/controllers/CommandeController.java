@@ -29,8 +29,8 @@ public class CommandeController {
 	 private static final String ACTION_1 =  " modifié avec succès"; 
 	 private static final String ACTION_2 =  "Statut de la commande avec l'ID "; 
 	@Autowired	
-	public CommandeController() {
-		this.cs = new CommandeService();
+	public CommandeController(CommandeService cs) {
+		this.cs = cs;
 	}
 	
 	

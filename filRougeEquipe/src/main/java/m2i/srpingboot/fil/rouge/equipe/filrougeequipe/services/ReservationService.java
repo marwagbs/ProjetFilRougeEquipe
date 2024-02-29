@@ -19,9 +19,9 @@ public class ReservationService {
 	private final TableResRepository tabResRepo;
 	
 	@Autowired
-	public ReservationService() {
-		this.reservationRepo = null;
-		this.tabResRepo = null;
+	public ReservationService(ReservationRepository reservationRepo,TableResRepository tabResRepo) {
+		this.reservationRepo = reservationRepo;
+		this.tabResRepo = tabResRepo;
 		
 	}
 	

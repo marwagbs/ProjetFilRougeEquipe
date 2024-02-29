@@ -19,8 +19,8 @@ public class ProduitController {
 	
 	 private final ProduitService ps;
 	 @Autowired	
-	public ProduitController() {
-		this.ps = new ProduitService();
+	public ProduitController(ProduitService ps) {
+		this.ps = ps;
 		// TODO Auto-generated constructor stub
 	}
 	
