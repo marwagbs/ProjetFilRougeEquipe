@@ -24,7 +24,6 @@ public class Reservation {
 	private LocalTime heure;
 
 	private int nbPersonne;
-	
 
 	private String statut;
 	private String commentaire;	

@@ -49,4 +49,6 @@ public class ReservationService {
 	public List<Reservation> getReservationsByStatutAndId(String statut1, String statut2, int id) {
 		return reservationRepo.findAllByStatutInAndId(List.of(statut1, statut2), id);
 	}
+	
+	
 }
