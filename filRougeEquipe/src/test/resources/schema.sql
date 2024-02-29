@@ -1,13 +1,25 @@
-DROP TABLE IF EXISTS Messages,Produits_Cartes, Commandes_Produits ,Produits , Categories,Commandes , TablesRes,Reservations ,Utilisateurs, Horaires_restaurants, Horaires ,Restaurants  ,cartes   ;
+drop table if exists messages;
+drop table if exists horaires_restaurants;
+drop table if exists reservations;
+drop table if exists commandes_produits;
+drop table if exists commandes;
+drop table if exists produits_cartes;
+drop table if exists produits;
+drop table if exists tableres;
+drop table if exists utilisateurs;
+drop table if exists categories;
+drop table if exists restaurants;
+drop table if exists cartes;
+drop table if exists horaires;
 
-CREATE TABLE Categories(
+CREATE TABLE categories(
 
 	id				INT				PRIMARY KEY ,
 	libelle			VARCHAR(20)			NOT NULL
 
 );
 
-CREATE TABLE Utilisateurs(
+CREATE TABLE utilisateurs(
 	id			  INT	PRIMARY KEY ,
 	nom		VARCHAR(50) NOT NULL,
 	prenom	VARCHAR(50) NOT NULL,
@@ -17,7 +29,7 @@ CREATE TABLE Utilisateurs(
 	role VARCHAR (50)
 );
 
-CREATE TABLE Produits(
+CREATE TABLE produits(
 	id				INT				PRIMARY KEY ,
 	nom VARCHAR (50) NOT NULL,
 	description  varchar(250) NOT NULL,
@@ -26,19 +38,19 @@ CREATE TABLE Produits(
 	
 
 );
-CREATE TABLE Cartes(
+CREATE TABLE cartes(
 	id				INT				PRIMARY KEY ,
 	libelle			VARCHAR(40)			NOT NULL
 );
 
-CREATE TABLE Produits_Cartes(
-	id				INT				PRIMARY KEY ,
+CREATE TABLE produits_cartes(
+
 	id_produit   INT,
 	id_carte   INT
 	
 );
 
-CREATE TABLE Restaurants(
+CREATE TABLE restaurants(
 	id			  INT	PRIMARY KEY ,
 	nom		VARCHAR(50) NOT NULL,
 	adresse VARCHAR(60) NOT NULL,
@@ -48,20 +60,19 @@ CREATE TABLE Restaurants(
 
 );
 
-CREATE TABLE Reservations(
+CREATE TABLE reservations(
 	id			  INT	PRIMARY KEY ,
 	date_res DATE NOT NULL,
 	heure time NOT NULL,
 	nb_personne int NOT NULL CHECK (nb_personne>=1),
 	id_utilisateur int NOT NULL,
 	id_restaurant INT NOT NULL,
-	id_table INT NOT NULL,
-	statut VARCHAR (50) NULL CHECK (statut in ('acceptée', 'refusée', null)),
+	statut VARCHAR (50) NULL,
 	commentaire VARCHAR (250) NULL
 
 );
 
-CREATE TABLE Messages(
+CREATE TABLE messages(
 	id			  INT	PRIMARY KEY ,
 	id_utilisateur int NOT NULL,
 	id_restaurant int NOT NULL,
@@ -69,97 +80,96 @@ CREATE TABLE Messages(
 	sujet  VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Tablesres(
+CREATE TABLE tableres(
 	id			  INT	PRIMARY KEY ,
 	nombre_places INT NOT NULL,
 	numero_table   INT NOT NULL, 
-	statut  VARCHAR (50) NULL DEFAULT 'absent' CHECK (statut in ('absent', 'present')),
+	statut  VARCHAR (50) NULL ,
+	id_reservation INT NULL,
 	id_restaurant INT NOT NULL
 
 );
 
-CREATE TABLE Commandes(
+CREATE TABLE commandes(
 	id			  INT	PRIMARY KEY ,
-	libelle			VARCHAR(20)	Null,
+	statut			VARCHAR(20)	Null,
+	heure	datetime,
 	id_table INT NOT NULL
 
 
 );
 
-CREATE TABLE Commandes_Produits(
-	id				INT				PRIMARY KEY ,
+CREATE TABLE commandes_produits(
 	id_commande INT NOT NULL,
 	id_produit INT NOT NULL
 	
 );
-CREATE TABLE Horaires(
-		id			  INT	PRIMARY KEY IDENTITY,
+CREATE TABLE horaires(
+		id			  INT	PRIMARY KEY ,
 		jour  VARCHAR(15) NOT NULL,
 		heure_ouverture VARCHAR(15) NOT NULL,
 		heure_fermeture VARCHAR(15) NOT NULL
 );
 
-CREATE TABLE Horaires_restaurants (
-	id				INT				PRIMARY KEY IDENTITY,
+CREATE TABLE horaires_restaurants (
 	id_restaurant INT NOT NULL,
 	id_horaire    INT NOT NULL
 
 );
 
-ALTER TABLE Produits 
+ALTER TABLE produits 
 	with CHECK ADD
 		FOREIGN KEY (id_categorie) REFERENCES categories(id)
 		ON DELETE NO ACTION;
 
 
-ALTER TABLE Produits_Cartes 
+ALTER TABLE produits_cartes 
 	with CHECK ADD
 		FOREIGN KEY (id_produit) REFERENCES produits(id),
 		FOREIGN KEY (id_carte) REFERENCES cartes(id);
 		
 
-ALTER TABLE Commandes
+ALTER TABLE commandes
 	with CHECK ADD
-	
-		FOREIGN KEY (id_table) REFERENCES TablesRes(id)
+		FOREIGN KEY (id_table) REFERENCES tableres(id)
 		ON DELETE CASCADE;
 
-ALTER TABLE Commandes_Produits 
+ALTER TABLE commandes_produits 
 	with CHECK ADD
 		FOREIGN KEY (id_produit) REFERENCES Produits(id),
 		FOREIGN KEY (id_commande) REFERENCES commandes(id);
 		
 
-ALTER TABLE Tablesres 
+ALTER TABLE tableres 
 	with CHECK ADD
+		FOREIGN KEY (id_reservation) REFERENCES reservations(id)
+		ON DELETE NO ACTION,
 		FOREIGN KEY (id_restaurant) REFERENCES restaurants(id)
 		ON DELETE CASCADE;
 	
 
 
-ALTER TABLE Restaurants 
+ALTER TABLE restaurants 
 	with CHECK ADD
-		FOREIGN KEY (id_carte) REFERENCES Cartes(id)
+		FOREIGN KEY (id_carte) REFERENCES cartes(id)
 		ON DELETE NO ACTION;
 
 
 
-ALTER TABLE Reservations 
+ALTER TABLE reservations 
 	with CHECK ADD
-		FOREIGN KEY (id_table) REFERENCES Tablesres(id)
-		ON DELETE NO ACTION,
 		FOREIGN KEY (id_restaurant) REFERENCES restaurants(id)
 		ON DELETE CASCADE,
 		FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs(id)
 		ON DELETE CASCADE;
 	
-ALTER TABLE Messages 
+ALTER TABLE messages 
 	with CHECK ADD
 		FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs(id),
 		FOREIGN KEY (id_restaurant) REFERENCES restaurants(id)
 		ON DELETE NO ACTION;
 
-ALTER TABLE Horaires_restaurants
+ALTER TABLE horaires_restaurants
 	with CHECK ADD
 		FOREIGN KEY (id_horaire) REFERENCES horaires(id),
 		FOREIGN KEY (id_restaurant) REFERENCES restaurants(id);
