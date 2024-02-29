@@ -16,8 +16,13 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.UtilisateurServic
 @CrossOrigin
 @RequestMapping("/connexion")
 public class ConnexionController {
-	@Autowired private UtilisateurService service;
 	
+	private final UtilisateurService service;
+	@Autowired
+	public ConnexionController() {
+		this.service = new UtilisateurService();
+		
+	}
 	/*
 	 * Endpoint utilisé pour authentifier un utilisateur au moment du login.
 	 * Renvoie une erreur 401 "Unauthorized" si le couple identifiant / mdp est faux
@@ -25,7 +30,7 @@ public class ConnexionController {
 	 */
 	
 	@PostMapping
-	public ResponseEntity<?> verifierUtilisateur(@RequestParam String email, @RequestParam String motDePasse) {
+	public ResponseEntity<Object> verifierUtilisateur(@RequestParam String email, @RequestParam String motDePasse) {
 	    try {
 	        Utilisateur utilisateur = service.verifierUtilisateur(email, motDePasse);
 	        return ResponseEntity.ok(utilisateur);

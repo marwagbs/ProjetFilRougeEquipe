@@ -17,9 +17,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.ProduitService;
 @RequestMapping("/produits")
 public class ProduitController {
 	
-	@Autowired private ProduitService ps;
-	
-
+	 private final ProduitService ps;
+	 @Autowired	
+	public ProduitController() {
+		this.ps = new ProduitService();
+		// TODO Auto-generated constructor stub
+	}
 	
 	@GetMapping
 	public ResponseEntity<Iterable<Produit>> getAllProduit(){

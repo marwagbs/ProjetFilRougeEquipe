@@ -12,8 +12,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.repositories.ProduitReposi
 @Service
 public class ProduitService {
 	
-	@Autowired private ProduitRepository pRepo;
-	
+ private final ProduitRepository pRepo;
+	@Autowired
+   public ProduitService() {
+	this.pRepo = null;
+		
+	}
 	public Iterable<Produit> selectAll(){
 		return pRepo.findAll();
 	}

@@ -16,8 +16,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.UtilisateurServic
 @CrossOrigin
 @RequestMapping("/creationDuCompte")
 public class CreationDuCompte {
-	@Autowired private UtilisateurService service;
-	
+ private final UtilisateurService service;
+	@Autowired
+	public CreationDuCompte() {
+		this.service = new UtilisateurService();
+		// TODO Auto-generated constructor stub
+	}
 	@PostMapping
 	public ResponseEntity<Utilisateur> insert(@RequestBody Utilisateur utilisateur){
 		service.insert(utilisateur);

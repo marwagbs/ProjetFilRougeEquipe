@@ -24,5 +24,5 @@ public class Message {
 	private Utilisateur utilisateur;
 	@ManyToOne
 	@JoinColumn(name="id_restaurant")
-	private Restaurant Restaurant;
+	private Restaurant restaurants;
 }

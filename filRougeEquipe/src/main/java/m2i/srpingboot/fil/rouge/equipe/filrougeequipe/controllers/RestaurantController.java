@@ -20,9 +20,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.RestaurantService
 @CrossOrigin
 @RequestMapping("/restaurants")
 public class RestaurantController {
-	@Autowired private RestaurantService restaurantservice;
-	
-	
+	 private final RestaurantService restaurantservice;
+	 @Autowired
+	public RestaurantController() {
+		this.restaurantservice = new RestaurantService();
+		
+	}
 	@GetMapping
 	public ResponseEntity<Iterable<Restaurant>> afficherAllRestaurants() {
 		return new ResponseEntity<>(restaurantservice.getAll(), HttpStatus.OK);

@@ -12,8 +12,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.repositories.TableResRepos
 @Service
 @Transactional
 public class TableResService {
-	@Autowired private TableResRepository tableResRepo;
+ private  final TableResRepository tableResRepo;
+	@Autowired
+ public TableResService() {
+	this.tableResRepo = null;
 	
+}
 	
 	public Iterable<TableRes> getAll() {return tableResRepo.findAll();}
 	public TableRes getById(int id) {return tableResRepo.findById(id).get();}

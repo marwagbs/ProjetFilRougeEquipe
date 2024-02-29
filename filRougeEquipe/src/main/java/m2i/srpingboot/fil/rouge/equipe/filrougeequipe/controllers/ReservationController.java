@@ -24,11 +24,17 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.TableResService;
 @CrossOrigin
 @RequestMapping("/reservations")
 public class ReservationController {
-	@Autowired
-	private ReservationService rs;
-	@Autowired
-	private TableResService ts;
+
+	private final ReservationService rs;
+
+	private final TableResService ts;
 	
+	@Autowired
+	public ReservationController() {
+		this.rs = new ReservationService();
+		this.ts = new TableResService();
+		
+	}
 	@GetMapping
 	public Iterable<Reservation> getAll() {
 		return rs.getAll();

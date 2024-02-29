@@ -12,7 +12,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.UtilisateurServic
 @CrossOrigin
 @RequestMapping("/deconnexion")
 public class DeconnexionController {
-	@Autowired private UtilisateurService service;
+private final UtilisateurService service;
+	@Autowired 
+	public DeconnexionController() {
+		this.service = new UtilisateurService();
+		
+	}
 	/*
 	 * Endpoint utilisé pour deconnecter un utilisateur grace à son token
 	 */
