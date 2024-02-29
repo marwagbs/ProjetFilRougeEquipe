@@ -20,8 +20,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.TableResService;
 @CrossOrigin
 @RequestMapping("/tableres")
 public class TableResController {
-	@Autowired private TableResService tableservice;
-
+ private final TableResService tableservice;
+	@Autowired
+	public TableResController() {
+		this.tableservice = new TableResService();
+		
+	}
 	@GetMapping
 	public ResponseEntity<Iterable<TableRes>> findAll() {
 		return new ResponseEntity<>(tableservice.getAll(), HttpStatus.OK); 

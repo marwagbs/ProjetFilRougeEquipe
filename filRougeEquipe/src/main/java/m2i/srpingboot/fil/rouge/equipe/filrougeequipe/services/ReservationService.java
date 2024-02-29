@@ -13,10 +13,17 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.repositories.TableResRepos
 
 @Service
 public class ReservationService {
+	
+	private final  ReservationRepository reservationRepo;
+	
+	private final TableResRepository tabResRepo;
+	
 	@Autowired
-	private ReservationRepository reservationRepo;
-	@Autowired
-	private TableResRepository tabResRepo;
+	public ReservationService() {
+		this.reservationRepo = null;
+		this.tabResRepo = null;
+		
+	}
 	
 	public Iterable<Reservation> getAll() { return reservationRepo.findAll(); }
 	public Reservation getById(int id) { return reservationRepo.findById(id).get(); }

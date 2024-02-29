@@ -17,10 +17,17 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.repositories.TableResRepos
 @Service
 public class CommandeService {
 	
-	@Autowired private CommandeRepository repo;
-	@Autowired private ProduitRepository prepo;
-	@Autowired private TableResRepository trepo;
+	 private final CommandeRepository repo;
+	 private final ProduitRepository prepo;
+	 private final TableResRepository trepo;
 	
+	 @Autowired
+	public CommandeService() {
+		this.repo = null;
+		this.prepo = null;
+		this.trepo = null;
+		
+	}
 	public Iterable<Commande> selectAll(){
 		return repo.findAll();
 	}

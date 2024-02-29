@@ -10,8 +10,13 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.repositories.RestaurantRep
 @Service
 @Transactional
 public class RestaurantService {
-	@Autowired private RestaurantRepository restaurantRepo;
+	 private final  RestaurantRepository restaurantRepo;
 	
+	 @Autowired
+	 public RestaurantService() {
+		this.restaurantRepo = null;
+		
+	}
 	public Iterable<Restaurant> getAll() { return restaurantRepo.findAll();}
     public Restaurant getById(int id) {return restaurantRepo.findById(id).get();}
     public void save(Restaurant restaurant) {restaurantRepo.save(restaurant);}

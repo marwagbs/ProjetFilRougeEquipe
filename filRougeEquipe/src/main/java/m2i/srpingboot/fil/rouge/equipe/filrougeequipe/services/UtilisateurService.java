@@ -18,8 +18,12 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.repositories.UtilisateurRe
 @Service
 public class UtilisateurService {
 	
-	@Autowired private UtilisateurRepository repo;
-	
+	private final UtilisateurRepository repo;
+	@Autowired
+	public UtilisateurService() {
+		this.repo = null;
+		 
+	}
 	public void insert(Utilisateur utilisateur) {
 		ServiceException serviceException = new ServiceException();
 		try {
@@ -48,13 +52,13 @@ public class UtilisateurService {
 		
 	}
 		
-	public Utilisateur selectByEmail(String email) throws ServiceException {
+	public Utilisateur selectByEmail(String email){
 			return repo.findByEmail(email);
 	}
 	
 	 public  boolean validatePassword(String motDePasse) {
 	        // la regex MDP
-	        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+	        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
 
 	        // Création du pattern
 	        Pattern pattern = Pattern.compile(regex);
@@ -186,7 +190,7 @@ public class UtilisateurService {
 				serviceException.ajouterErreur("Le numéro de téléphone doit avoir entre 8 et 50 caractères");
 			}
 			
-			if (serviceException.getErreurs().size() > 0) {
+			if (serviceException.getErreurs().isEmpty()) {
 				throw serviceException;
 			}
 }

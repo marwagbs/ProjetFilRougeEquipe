@@ -25,8 +25,15 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.CommandeService;
 @CrossOrigin
 @RequestMapping("/commandes")
 public class CommandeController {
-	@Autowired private CommandeService cs;
-
+	 private final CommandeService cs;
+	 private static final String ACTION_1 =  " modifié avec succès"; 
+	 private static final String ACTION_2 =  "Statut de la commande avec l'ID "; 
+	@Autowired	
+	public CommandeController() {
+		this.cs = new CommandeService();
+	}
+	
+	
 	/********Recuperer tous les commandes des restaurant******/
 	@GetMapping
 	public ResponseEntity<Iterable<Commande>> getAll(){
@@ -82,28 +89,28 @@ public class CommandeController {
 	public ResponseEntity<String>updateStatut(@PathVariable("id") int id, @RequestBody String statut){
 			cs.modifierStatut(id, statut);
 
-	      return new ResponseEntity<>("Statut de la commande avec l'ID " + id + " modifié avec succès", HttpStatus.OK);
+	      return new ResponseEntity<>(ACTION_2 + id + ACTION_1, HttpStatus.OK);
 	}
 	/*******Modifier le statut  mauto en prete*******/
 	@PutMapping("/modifierPrete/{id}")
 	public ResponseEntity<String>updateStatutPrete(@PathVariable("id") int id){
 			cs.modifierStatutPrete(id);
 
-	      return new ResponseEntity<>("Statut de la commande avec l'ID " + id + " modifié avec succès", HttpStatus.OK);
+	      return new ResponseEntity<>(ACTION_2 + id + ACTION_1, HttpStatus.OK);
 	}
 	/*******Modifier le statut  mauto en servie*******/
 	@PutMapping("/modifierServie/{id}")
 	public ResponseEntity<String>updateStatutServie(@PathVariable("id") int id){
 			cs.modifierStatutServie(id);
 
-	      return new ResponseEntity<>("Statut de la commande avec l'ID " + id + " modifié avec succès", HttpStatus.OK);
+	      return new ResponseEntity<>(ACTION_2 + id + ACTION_1, HttpStatus.OK);
 	}
 	/*******Modifier le statut  mauto en reglee*******/
 	@PutMapping("/modifierReglee/{id}")
 	public ResponseEntity<String>updateStatutReglee(@PathVariable("id") int id){
 			cs.modifierStatutReglee(id);
 
-	      return new ResponseEntity<>("Statut de la commande avec l'ID " + id + " modifié avec succès", HttpStatus.OK);
+	      return new ResponseEntity<>(ACTION_2 + id + ACTION_1, HttpStatus.OK);
 	}
 	
 	/*******supprimer la commande *****/
