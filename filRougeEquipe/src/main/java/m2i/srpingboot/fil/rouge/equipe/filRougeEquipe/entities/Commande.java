@@ -16,6 +16,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity @Table(name="commandes")
@@ -33,11 +34,13 @@ public class Commande {
 	
 	@JoinColumn(name="id_table")
 	private TableRes tableRes;
-	@ManyToMany(fetch =FetchType.EAGER)
+	@ManyToMany(fetch =FetchType.LAZY)
 	@JoinTable(
 			name="Commandes_Produits",
 			joinColumns= {@JoinColumn(name="id_commande")},
 			inverseJoinColumns = {@JoinColumn(name="id_produit")}
 			)
 	private List<Produit> produits;
+	@Transient
+	private Float total;
 }
