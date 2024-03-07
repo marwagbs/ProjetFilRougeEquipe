@@ -67,6 +67,7 @@ CREATE TABLE reservations(
 	nb_personne int NOT NULL CHECK (nb_personne>=1),
 	id_utilisateur int NOT NULL,
 	id_restaurant INT NOT NULL,
+	id_table INT NOT NULL,
 	statut VARCHAR (50) NULL,
 	commentaire VARCHAR (250) NULL
 
@@ -85,7 +86,6 @@ CREATE TABLE tableres(
 	nombre_places INT NOT NULL,
 	numero_table   INT NOT NULL, 
 	statut  VARCHAR (50) NULL ,
-	id_reservation INT NULL,
 	id_restaurant INT NOT NULL
 
 );
@@ -142,8 +142,6 @@ ALTER TABLE commandes_produits
 
 ALTER TABLE tableres 
 	with CHECK ADD
-		FOREIGN KEY (id_reservation) REFERENCES reservations(id)
-		ON DELETE NO ACTION,
 		FOREIGN KEY (id_restaurant) REFERENCES restaurants(id)
 		ON DELETE CASCADE;
 	
@@ -160,6 +158,8 @@ ALTER TABLE reservations
 	with CHECK ADD
 		FOREIGN KEY (id_restaurant) REFERENCES restaurants(id)
 		ON DELETE CASCADE,
+		FOREIGN KEY (id_table) REFERENCES tableres(id)
+		ON DELETE NO ACTION,
 		FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs(id)
 		ON DELETE CASCADE;
 	

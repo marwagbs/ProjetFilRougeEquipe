@@ -1,3 +1,4 @@
+/*
 package m2i.srpingboot.fil.rouge.equipe.filrougeequipe.filter;
 
 import java.io.IOException;
@@ -27,30 +28,19 @@ public class ConnexionFilter implements Filter{
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		
 		
-		/*
-		 * Si on essaie d'accéder au endpoint de login, on autorise l'accès
-		 * sans vérifier d'autre condition
-		 */
 		if ("/connexion".equals(httpReq.getServletPath())
 				|| "OPTIONS".equals(httpReq.getMethod())) {
 			chain.doFilter(request, response);
 			return;
 		}
 		
-		/*
-		 * Si le token n'est pas renseigné, on interdit l'accès
-		 */
 		String auth = httpReq.getHeader("token");
 		if (auth == null || auth.isBlank()) {
 			httpResp.sendError(HttpStatus.UNAUTHORIZED.value());
 			return;
 		}
 		
-		/*
-		 * Si le token est renseigné mais ne correspond à aucun user
-		 * on interdit l'accès
-		 * Sinon, on autorise l'accès
-		 */
+		
 		Utilisateur utilisateur = service.getByToken(auth);
 		if (utilisateur == null) {
 			httpResp.sendError(HttpStatus.UNAUTHORIZED.value());
@@ -58,18 +48,12 @@ public class ConnexionFilter implements Filter{
 		} 
 		
 
-        /*
-         * Si le rôle de l'utilisateur n'est ni "admin" ni "equipe", interdire l'accès
-         */
         if (!"admin".equals(utilisateur.getRole()) && !"equipe".equals(utilisateur.getRole())) {
             httpResp.sendError(HttpStatus.FORBIDDEN.value());
             return;
         }
 
-        /*
-         * Si le rôle de l'utilisateur est "client" ou "equipe", interdire l'accès à la
-         * page de création de compte
-         */
+        
         if ("client".equals(utilisateur.getRole()) || "equipe".equals(utilisateur.getRole())) {
             if ("/creation-compte".equals(httpReq.getServletPath())) {
                 httpResp.sendError(HttpStatus.FORBIDDEN.value());
@@ -81,3 +65,4 @@ public class ConnexionFilter implements Filter{
         chain.doFilter(request, response);
 	}
 }
+*/
