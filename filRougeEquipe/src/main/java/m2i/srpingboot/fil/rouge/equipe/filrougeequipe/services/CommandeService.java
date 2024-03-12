@@ -96,4 +96,9 @@ public class CommandeService {
 	public List<Commande> findByTableResRestaurant(Restaurant restaurant){
 		return repo.findByTableRes_Restaurant(restaurant);
 	}
+	
+	
+	public List<Commande> trouverCommandesParStatut(String statut) {
+        return repo.findByStatut(statut);
+    }
 }

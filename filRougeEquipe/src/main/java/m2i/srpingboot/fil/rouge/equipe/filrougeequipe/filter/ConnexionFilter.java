@@ -1,4 +1,6 @@
+
 /* package m2i.srpingboot.fil.rouge.equipe.filrougeequipe.filter;
+
 
 import java.io.IOException;
 
@@ -26,6 +28,7 @@ public class ConnexionFilter implements Filter{
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		
+
 		if ("/connexion".equals(httpReq.getServletPath())
 				|| "OPTIONS".equals(httpReq.getMethod())) {
 			chain.doFilter(request, response);
@@ -37,7 +40,7 @@ public class ConnexionFilter implements Filter{
 			httpResp.sendError(HttpStatus.UNAUTHORIZED.value());
 			return;
 		}
-		
+
 		Utilisateur utilisateur = service.getByToken(auth);
 		if (utilisateur == null) {
 			httpResp.sendError(HttpStatus.UNAUTHORIZED.value());
