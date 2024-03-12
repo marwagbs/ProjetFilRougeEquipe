@@ -84,6 +84,13 @@ public class CommandeController {
 		return new ResponseEntity<>(commande, HttpStatus.OK);
 	}
 	
+	
+	@PutMapping("/{id}/served")
+    public ResponseEntity<String> updateStatutServed(@PathVariable("id") int id) {
+        cs.modifierStatut(id, "served");
+        return ResponseEntity.ok(ACTION_2 + id + ACTION_1);
+    }
+	
 	/*******Modifier le statut  manuellement*******/
 	@PutMapping("/modifier/{id}")
 	public ResponseEntity<String>updateStatut(@PathVariable("id") int id, @RequestBody String statut){
@@ -91,6 +98,7 @@ public class CommandeController {
 
 	      return new ResponseEntity<>(ACTION_2 + id + ACTION_1, HttpStatus.OK);
 	}
+	
 	/*******Modifier le statut  mauto en prete*******/
 	@PutMapping("/modifierPrete/{id}")
 	public ResponseEntity<String>updateStatutPrete(@PathVariable("id") int id){
@@ -120,5 +128,16 @@ public class CommandeController {
 		cs.delete(id);
 		return new ResponseEntity<>(commande, HttpStatus.OK);
 	}
-
+	
+	@GetMapping("/pret")
+    public List<Commande> getCommandesPret() {
+        return cs.trouverCommandesParStatut("pret");
+    }
+	
+	
+	
+	@GetMapping("/servie")
+    public List<Commande> getCommandesServie() {
+        return cs.trouverCommandesParStatut("servie");
+    }
 }
