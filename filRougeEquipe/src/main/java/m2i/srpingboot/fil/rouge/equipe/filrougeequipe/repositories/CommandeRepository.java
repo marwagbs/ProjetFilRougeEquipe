@@ -23,4 +23,7 @@ public interface CommandeRepository extends CrudRepository<Commande, Integer>{
     
     
     List<Commande> findByTableRes_Restaurant(Restaurant restaurant);
+    
+    @Query("SELECT c FROM Commande c WHERE c.statut = :statut")
+    List<Commande> findByStatut(String statut);
 }
