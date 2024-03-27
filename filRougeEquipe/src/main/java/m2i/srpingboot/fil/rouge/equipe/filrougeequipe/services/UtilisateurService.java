@@ -1,6 +1,6 @@
 package m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services;
 
-import java.nio.charset.StandardCharsets;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -84,7 +84,7 @@ public class UtilisateurService {
 	        try {
 	            MessageDigest md = MessageDigest.getInstance("SHA-512");
 	            md.update(salt);
-	            md.update(motDePasseToHash.getBytes(StandardCharsets.UTF_8));
+	            md.update(motDePasseToHash.getBytes("UTF-8"));
 	            byte[] bytes = md.digest();
 
 	            StringBuilder sb = new StringBuilder();
@@ -95,7 +95,10 @@ public class UtilisateurService {
 	            generatedPassword = sb.toString();
 	        } catch (NoSuchAlgorithmException e) {
 	            e.printStackTrace();
-	        }
+	        } catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        return generatedPassword;
 	    }
 
@@ -110,7 +113,7 @@ public class UtilisateurService {
 		        String mdpHache=utilisateur.getMotDePasse();
 		       
 		        if (!motDePasseSaisie.equals(mdpHache)) {
-		        	serviceException.ajouterErreur("Mot de passe incorrect");
+		        	serviceException.ajouterErreur("Email ou mot de passe incorrect ");
 		        	throw serviceException;
 		       
 		        } else {
