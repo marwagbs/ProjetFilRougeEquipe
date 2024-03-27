@@ -1,13 +1,8 @@
-
-/* package m2i.srpingboot.fil.rouge.equipe.filrougeequipe.filter;
-
-
+package m2i.srpingboot.fil.rouge.equipe.filrougeequipe.filter;
 import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -62,4 +57,3 @@ public class ConnexionFilter implements Filter{
         chain.doFilter(request, response);
 	}
 }
-*/

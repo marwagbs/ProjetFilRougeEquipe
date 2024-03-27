@@ -4,18 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.entities.Commande;
+import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.entities.Produit;
 import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.entities.TableRes;
 @SpringBootTest
 class CommandeServiceTest {
 
 	private final CommandeService commandeService;
 	private final TableResService tableService;
+
 	 @Autowired
 	public CommandeServiceTest(CommandeService commandeService , TableResService tableService) {
 		this.commandeService=commandeService;
@@ -43,6 +46,8 @@ class CommandeServiceTest {
 		Float commandeTarif=commandeService.calculerMontantTotalParTable(tableRes);
 		assertEquals(35.98, commandeTarif, 0.01);
 	 }
+	 
+	
 	 
 	
 }
