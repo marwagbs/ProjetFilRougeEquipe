@@ -24,6 +24,8 @@ public class CreationDuCompte {
 	}
 	@PostMapping
 	public ResponseEntity<Utilisateur> insert(@RequestBody Utilisateur utilisateur){
+
+        System.out.println(utilisateur);
 		service.insert(utilisateur);
 		return new ResponseEntity<>(utilisateur, HttpStatus.CREATED);
 	}

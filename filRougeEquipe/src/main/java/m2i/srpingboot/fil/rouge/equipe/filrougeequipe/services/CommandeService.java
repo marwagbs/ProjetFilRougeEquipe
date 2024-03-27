@@ -81,17 +81,23 @@ public class CommandeService {
 		  
 	  }
 	
-	public Commande effectuerCommande(List<Integer> idProduits, int idTable) {
-		Iterable<Produit> produits=prepo.findAllById(idProduits);
+	public Commande effectuerCommande (int idTable) {
+	
 		Commande nouvelleCommande= new Commande();
 		nouvelleCommande.setHeure(LocalDateTime.now()); 
 		nouvelleCommande.setStatut("En attente");
 		TableRes tableRes = trepo.findById(idTable).get();
-        nouvelleCommande.setTableRes(tableRes);
-	
-		nouvelleCommande.setProduits((List<Produit>) produits);
+		System.out.println(tableRes.getId());
+		System.out.println(tableRes.getNombrePlaces());
+		System.out.println(tableRes.getNumeroTable());
+        
+        if(tableRes!=null) {
+        	nouvelleCommande.setTableRes(tableRes);
+        }
 		return repo.save(nouvelleCommande);
 	}
+	
+	
 	
 	public List<Commande> findByTableResRestaurant(Restaurant restaurant){
 		return repo.findByTableRes_Restaurant(restaurant);

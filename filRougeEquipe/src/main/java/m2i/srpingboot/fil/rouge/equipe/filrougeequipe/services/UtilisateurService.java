@@ -41,6 +41,8 @@ public class UtilisateurService {
 	        utilisateur.setTelephone(utilisateur.getTelephone());
 	        utilisateur.setRole("employe");
 	        
+	        System.out.println(utilisateur);
+	        
 	        if(repo.findByEmail(utilisateur.getEmail()) != null) {
 				serviceException.ajouterErreur("Cette adreese email existe déja");
 			}else {
