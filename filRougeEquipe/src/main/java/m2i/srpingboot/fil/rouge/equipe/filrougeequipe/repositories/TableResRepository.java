@@ -36,12 +36,25 @@ public interface TableResRepository extends CrudRepository<TableRes, Integer>{
 		+ "LEFT JOIN "
 		+ " utilisateurs AS u ON  r.id_utilisateur = u.id "
 		+ "  where   tr.id_restaurant = :id ", nativeQuery = true)
-	List<TableRes>afficherTablesRestau(int id);
+	
+
+List<TableRes>afficherTablesRestau(int id);
 		
 	
 
 
 // Madina ?? 
 	List<TableRes> findByRestaurantId(int id);
+
+
+
+ // Tables occupées 
+	 @Query(value = "SELECT * FROM TableRes tr WHERE tr.id_restaurant = :id AND tr.statut = 'occupée'" , nativeQuery = true)
+	List<TableRes> afficherTablesRestauOccupees(int id);
+
+
+
+
+	
 
 }

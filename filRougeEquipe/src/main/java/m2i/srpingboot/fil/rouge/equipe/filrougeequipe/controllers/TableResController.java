@@ -17,7 +17,7 @@ import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.entities.TableRes;
 import m2i.srpingboot.fil.rouge.equipe.filrougeequipe.services.TableResService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200") 
 @RequestMapping("/tableres")
 public class TableResController {
  private final TableResService tableservice;
@@ -75,5 +75,11 @@ public class TableResController {
 		return new ResponseEntity<>(tableservice.afficherTablesRestau(idRes), HttpStatus.OK); 
 		
 	}
+	@GetMapping(path = "/{idRes}/tablesOccupees")
+	public ResponseEntity<Iterable<TableRes>> afficherTablesRestauOccupees (@PathVariable("idRes") int idRes){
+		return new ResponseEntity<>(tableservice.afficherTablesRestauOccupes(idRes), HttpStatus.OK); 
+		
+	}
+	
 	
 }

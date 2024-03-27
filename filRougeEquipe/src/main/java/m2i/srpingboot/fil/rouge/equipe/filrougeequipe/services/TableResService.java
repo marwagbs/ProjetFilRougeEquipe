@@ -59,5 +59,9 @@ public List<TableRes> afficherTablesRestau(int id){
 	return tableResRepo.afficherTablesRestau(id);
 	
 }
+
+public List<TableRes> afficherTablesRestauOccupes(int id){
+	return tableResRepo.afficherTablesRestauOccupees(id);
+}
 	}
 
