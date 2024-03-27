@@ -76,5 +76,11 @@ public class TableResController {
 		
 	}
 	
+	@GetMapping(path = "/{idRes}/tablesOccupees")
+	public ResponseEntity<Iterable<TableRes>> afficherTablesRestauOccupees (@PathVariable("idRes") int idRes){
+		return new ResponseEntity<>(tableservice.afficherTablesRestauOccupes(idRes), HttpStatus.OK);
+		
+	}
+	
 	
 }
