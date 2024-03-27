@@ -25,6 +25,7 @@ public class ConnexionFilter implements Filter{
 
  
 		if ("/connexion".equals(httpReq.getServletPath())
+				|| "/creationDuCompte".equals(httpReq.getServletPath())
 				|| "OPTIONS".equals(httpReq.getMethod())) {
 			chain.doFilter(request, response);
 			return;
@@ -42,17 +43,17 @@ public class ConnexionFilter implements Filter{
 		} 
 
  
-        if (!"admin".equals(utilisateur.getRole()) && !"equipe".equals(utilisateur.getRole())) {
+        if (!"admin".equals(utilisateur.getRole()) && !"employe".equals(utilisateur.getRole())) {
             httpResp.sendError(HttpStatus.FORBIDDEN.value());
             return;
         }
  
-        if ("client".equals(utilisateur.getRole()) || "equipe".equals(utilisateur.getRole())) {
-            if ("/creation-compte".equals(httpReq.getServletPath())) {
-                httpResp.sendError(HttpStatus.FORBIDDEN.value());
-                return;
-            }
-        }
+//        if ("client".equals(utilisateur.getRole()) || "employe".equals(utilisateur.getRole())) {
+//            if ("/creation-compte".equals(httpReq.getServletPath())) {
+//                httpResp.sendError(HttpStatus.FORBIDDEN.value());
+//                return;
+//            }
+//        }
         chain.doFilter(request, response);
 	}
 

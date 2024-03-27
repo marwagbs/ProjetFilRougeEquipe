@@ -2,6 +2,7 @@ package m2i.srpingboot.fil.rouge.equipe.filrougeequipe.controllers;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,13 +44,10 @@ public class CommandeController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Commande> find(@PathVariable("id") int id){
 		return new ResponseEntity<>(cs.selectById(id), HttpStatus.OK);
-	}
-	/*****Effectuer une commande pout une table précis****/
 	
-	 @PostMapping("/effectuer/{id}")
-	    public Commande effectuerCommande(@RequestBody List<Integer> produitIds, @PathVariable("id") int idTable) {
-	        return cs.effectuerCommande(produitIds , idTable);
-	    }
+	}
+	
+
 	
 	/*****Afficher la commande par table *****/
 	@GetMapping("/table/{idTable}")
@@ -77,14 +75,43 @@ public class CommandeController {
 	
 	
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Commande>update(@PathVariable("id") int id, @RequestBody Commande commande){
-		commande.setId(id);
-		cs.save(commande);
-		return new ResponseEntity<>(commande, HttpStatus.OK);
-	}
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Commande>update(@PathVariable("id") int id, @RequestBody Commande commande){
+//		commande.setId(id);
+//		cs.save(commande);
+//		return new ResponseEntity<>(commande, HttpStatus.OK);
+//	}
+//		
+	/*****Effectuer une commande pout une table précis****/
 	
+	 @PostMapping("/cree/{id}")
+	    public Commande effectuerCommande(@PathVariable("id") int idTable) {
+	       return cs.effectuerCommande(idTable);
+	       
+	    }
 	
+	 @PutMapping("/{id}")
+	 public ResponseEntity<Commande> updateCommande(@PathVariable("id") int id, @RequestBody Commande updatedCommande) {
+	     
+	     Commande existingCommande = cs.selectById(id);
+	     
+	     if (existingCommande != null) {
+	 
+	         existingCommande.setStatut(updatedCommande.getStatut());
+	
+	         if (updatedCommande.getProduits() != null && !updatedCommande.getProduits().isEmpty()) {
+	             existingCommande.getProduits().addAll(updatedCommande.getProduits());
+	         }
+
+	         Commande savedCommande = cs.save(existingCommande);
+
+	         return new ResponseEntity<>(savedCommande, HttpStatus.OK);
+	     } else {
+	         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	     }
+	 }
+	 
+	 
 	@PutMapping("/{id}/served")
     public ResponseEntity<String> updateStatutServed(@PathVariable("id") int id) {
         cs.modifierStatut(id, "served");

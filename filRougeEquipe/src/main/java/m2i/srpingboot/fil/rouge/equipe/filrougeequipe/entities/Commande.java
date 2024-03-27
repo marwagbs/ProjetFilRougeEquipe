@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Data;
@@ -27,7 +27,7 @@ public class Commande {
 	private int id;
 	private String statut;
 	private LocalDateTime heure;
-	@OneToOne(
+	@ManyToOne(
 			cascade= CascadeType.ALL,
 			fetch=FetchType.EAGER		
 			)

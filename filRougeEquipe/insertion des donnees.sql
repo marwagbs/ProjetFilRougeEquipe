@@ -4,34 +4,34 @@ INSERT INTO Categories (libelle) VALUES
 ('Plats'),
 ('Boisson'),
 ('Dessert');
-
+ 
 -- Insertion des produits
 INSERT INTO Produits (nom, description, prix, id_categorie) VALUES
 ('Salade César', 'Salade romaine, poulet grillé, parmesan, croutons', 10.99, 1),
 ('Poulet rôti', 'Poulet rôti avec légumes de saison', 15.99, 2),
-('Coca-Cola', 'Boisson gazeuse', 2.50, 4),
-('Tiramisu', 'Dessert italien au café', 7.99, 3),
+('Coca-Cola', 'Boisson gazeuse', 2.50, 3),
+('Tiramisu', 'Dessert italien au café', 7.99, 4),
 ('Soupe à l oignon', 'Soupe à l oignon avec fromage gratiné', 8.50, 1),
 ('Steak frites', 'Steak saignant avec frites croustillantes', 18.50, 2),
-('Eau minérale', 'Eau plate de source', 1.99, 4),
-('Salade de fruits', 'Assortiment de fruits frais', 9.99, 3),
+('Eau minérale', 'Eau plate de source', 1.99, 3),
+('Salade de fruits', 'Assortiment de fruits frais', 9.99, 4),
 ('Pâtes Carbonara', 'Pâtes avec sauce à la crème, lardons et parmesan', 12.50, 2),
-('Thé vert', 'Thé vert japonais', 3.99, 4);
-
-
+('Thé vert', 'Thé vert japonais', 3.99, 3);
+ 
+ 
 -- Insertion des utilisateurs
-INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, telephone, is_admin) VALUES
-('Dupont', 'Jean', 'jean.dupont@mail.com', 'motdepasse1', '1234567890', 0),
-('Martin', 'Sophie', 'sophie.martin@mail.com', 'motdepasse2', '2345678901', 0),
-('Lefevre', 'Pierre', 'pierre.lefevre@mail.com', 'motdepasse3', '3456789012', 1),
-('Dubois', 'Marie', 'marie.dubois@mail.com', 'motdepasse4', '4567890123', 0),
-('Bertrand', 'Thomas', 'thomas.bertrand@mail.com', 'motdepasse5', '5678901234', 0),
-('Leroux', 'Laura', 'laura.leroux@mail.com', 'motdepasse6', '6789012345', 0),
-('Girard', 'Alexandre', 'alexandre.girard@mail.com', 'motdepasse7', '7890123456', 0),
-('Moreau', 'Céline', 'celine.moreau@mail.com', 'motdepasse8', '8901234567', 0),
-('Fournier', 'Luc', 'luc.fournier@mail.com', 'motdepasse9', '9012345678', 0),
-('Roux', 'Emilie', 'emilie.roux@mail.com', 'motdepasse10', '0123456789', 0);
-
+INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, telephone, role) VALUES
+('Dupont', 'Jean', 'jean.dupont@mail.com', 'motdepasse1', '1234567890', null),
+('Martin', 'Sophie', 'sophie.martin@mail.com', 'motdepasse2', '2345678901', null),
+('Lefevre', 'Pierre', 'pierre.lefevre@mail.com', 'motdepasse3', '3456789012', null),
+('Dubois', 'Marie', 'marie.dubois@mail.com', 'motdepasse4', '4567890123', null),
+('Bertrand', 'Thomas', 'thomas.bertrand@mail.com', 'motdepasse5', '5678901234', null),
+('Leroux', 'Laura', 'laura.leroux@mail.com', 'motdepasse6', '6789012345', null),
+('Girard', 'Alexandre', 'alexandre.girard@mail.com', 'motdepasse7', '7890123456', null),
+('Moreau', 'Céline', 'celine.moreau@mail.com', 'motdepasse8', '8901234567', null),
+('Fournier', 'Luc', 'luc.fournier@mail.com', 'motdepasse9', '9012345678', null),
+('Roux', 'Emilie', 'emilie.roux@mail.com', 'motdepasse10', '0123456789', null);
+ 
 -- Insertion des cartes
 INSERT INTO Cartes (libelle) VALUES
 ('Carte Printemps'),
@@ -44,7 +44,7 @@ INSERT INTO Cartes (libelle) VALUES
 ('Carte Classique'),
 ('Carte Exotique'),
 ('Carte Gourmande');
-
+ 
 INSERT INTO Produits_Cartes(id_produit, id_carte)
 SELECT P.id, C.id
 FROM Produits P, Cartes C;
@@ -54,30 +54,30 @@ INSERT INTO Restaurants (nom, adresse, cpo, ville, id_carte) VALUES
 ('La Brasserie du Coin', '24 Avenue Gourmet', '75001', 'PARIS', 2),
 ('Chez Marcel', '8 Rue de Délices', '69002', 'LYON', 3),
 ('Le Bon Appétit', '15 Quai Savoureux', '33000', 'BORDEAUX', 4);
-
+ 
 -- Insertion des tables de réservation
 INSERT INTO TableRes (nombre_places, numero_table, statut, id_restaurant) VALUES
-(4, 1, 'absent', 1),
-(2, 1, 'present', 1),
-(6, 1, 'absent', 2),
-(5, 1, 'absent', 3),
-(3, 2, 'present', 2),
-(4, 2, 'absent', 4),
-(2, 2, 'absent', 3),
-(6, 2, 'absent', 4),
-(3, 3, 'present', 1),
-(5, 3, 'absent', 1),
-(4, 4, 'absent', 4),
-(2, 4, 'present', 2),
+(4, 1, 'present', 1),
+(2, 2, 'present', 1),
+(6, 3, 'absent', 2),
+(5, 4, 'absent', 3),
+(3, 5, 'present', 2),
+(4, 6, 'absent', 4),
+(2, 7, 'absent', 3),
+(6, 8, 'absent', 4),
+(3, 9, 'present', 1),
+(5, 10, 'absent', 1),
+(4, 1, 'absent', 4),
+(2, 2, 'present', 2),
 (6, 3, 'absent', 3),
-(5, 3, 'absent', 4),
+(5, 4, 'absent', 4),
 (3, 5, 'present', 1),
-(4, 5, 'absent', 2),
-(2, 4, 'absent', 3),
-(6, 4, 'absent', 4),
-(3, 6, 'present', 1),
-(5, 6, 'absent', 2);
-
+(4, 6, 'absent', 2),
+(2, 7, 'absent', 3),
+(6, 8, 'absent', 4),
+(3, 9, 'present', 1),
+(5, 10, 'absent', 2);
+ 
 -- Insertion des réservations
 INSERT INTO Reservations (date_res, heure, nb_personne, id_utilisateur, id_restaurant, statut, commentaire, id_table) VALUES
 ('2024-02-01', '19:30:00', 4, 1, 1, 'acceptée', 'Réservation pour un anniversaire', 2),
@@ -89,9 +89,16 @@ INSERT INTO Reservations (date_res, heure, nb_personne, id_utilisateur, id_resta
 ('2024-02-07', '20:30:00', 4, 7, 3, 'acceptée', NULL, 7),
 ('2024-02-08', '18:00:00', 2, 8, 4, 'refusée', NULL, 11),
 ('2024-02-09', '19:45:00', 5, 9, 1, 'acceptée', NULL, 9),
-('2024-02-10', '20:15:00', 3, 10, 2, 'acceptée', NULL, 12);
-
-
+('2024-02-10', '20:15:00', 3, 10, 2, 'acceptée', NULL, 12),
+('2024-03-28', '19:30:00', 4, 1, 1, NULL, 'Réservation pour un anniversaire', NULL),
+('2024-04-01', '20:00:00', 2, 2, 1, NULL, NULL, NULL),
+('2024-03-29', '18:45:00', 3, 3, 1, NULL, 'Réservation pour un groupe trop important', NULL),
+('2024-04-02', '19:00:00', 5, 4, 1, NULL, NULL, NULL),
+('2024-03-30', '21:00:00', 2, 5, 1, NULL, NULL, NULL),
+('2024-04-03', '19:15:00', 3, 6, 1, NULL, NULL, NULL),
+('2024-03-31', '20:30:00', 4, 7, 1, NULL, NULL, NULL);
+ 
+ 
 -- Insertion des messages
 INSERT INTO Messages (id_utilisateur, id_restaurant, contenu, sujet) VALUES
 (2, 1, 'Bonjour, nous avons des allergies alimentaires spécifiques.', 'Allergies alimentaires'),
@@ -99,7 +106,7 @@ INSERT INTO Messages (id_utilisateur, id_restaurant, contenu, sujet) VALUES
 (6, 3, 'Y a-t-il des plats végétariens disponibles ?', 'Options végétariennes'),
 (8, 4, 'Pouvez-vous personnaliser un plat pour moi ?', 'Personnalisation du plat'),
 (10, 1, 'Nous avons un grand groupe, avez-vous une salle privée ?', 'Groupe important');
-
+ 
 -- Insertion des commandes
 INSERT INTO Commandes (statut, id_table) VALUES
 ('Prête', 1),
@@ -112,7 +119,7 @@ INSERT INTO Commandes (statut, id_table) VALUES
 ('Réglée', 8),
 ('Servie', 9),
 ('Prête', 10);
-
+ 
 -- Insertion des commandes produits
 INSERT INTO Commandes_Produits (id_commande, id_produit) VALUES
 (1, 1),
@@ -125,7 +132,7 @@ INSERT INTO Commandes_Produits (id_commande, id_produit) VALUES
 (8, 8),
 (9, 9),
 (10, 10);
-
+ 
 -- Insertion des horaires
 INSERT INTO Horaires (jour, heure_ouverture, heure_fermeture)
 VALUES
